@@ -78,7 +78,7 @@ function gestionarXml(dadesXml){
   for (i = 0; i < nopt; i++) { 
     opcionesSelect2[i] = xmlDoc.getElementById("IRON005").getElementsByTagName('option')[i].innerHTML;
  }
- ponerDatosSelectHtml(tituloSelect2,opcionesSelect2);
+ ponerDatosSelect2Html(tituloSelect2,opcionesSelect2);
  respuestaSelect2=parseInt(xmlDoc.getElementsByTagName("answer")[1].innerHTML);
 
 //****************************************************************************************************
