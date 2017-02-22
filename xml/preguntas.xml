@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE questions SYSTEM "questions.dtd">
+<questions>
+<question id='IRON001'>
+<type>text</type>
+<title>Any del CD The Trooper</title>
+<answer>1983</answer>
+</question>
+<question id='IRON002'>
+<type>text</type>
+<title>Com es diu el darrer disc D'Iron Maiden?</title>
+<answer>The book of souls</answer>
+</question>
+<question id='IRON003'>
+<type>multiple</type>
+<title>A quins discs ha estat el cantant Blaze Bayley?</title>
+<option>The X Factor</option>
+<option>Brave New World</option> 
+<option>The final Frontier</option>
+<option>Virtual XI</option>
+<answer>0</answer> <!-- 0, 1, 2, 3 -->
+<answer>3</answer>
+</question>
+<question id='IRON004'>
+<type>select</type>
+<title>Quin va ser el primer cantant d'Iron Maiden?</title>
+<option>Blaze Bayley</option>
+<option>Bruce Dickinson</option> 
+<option>Paul Di'Anno</option>
+<answer>2</answer> <!-- 0, 1, 2 -->
+</question>
+<question id='IRON005'>
+<type>select</type>
+<title>Com es diu la mascota d'Iron Maiden?</title>
+<option>Jhon</option>
+<option>Eddie</option> 
+<option>Steve</option>
+<answer>1</answer> <!-- 0, 1, 2 -->
+</question>
+<question id='IRON006'>
+<type>radio</type>
+<title>Ordena cronologicament els primers discs d'Iron Maiden:</title>
+<option>a) Killers, The Number of the Beast, Iron Maiden, Powerslave </option>
+<option>b) Killers, Iron Maiden, The Number of the Beast, Powerslave </option> 
+<option>c) Iron Maiden, Killers, The Number of the Beast, Powerslave </option>
+<answer>2</answer> <!-- 0, 1, 2 -->
+</question>
+</questions>
