@@ -160,16 +160,6 @@ function ponerDatosSelectHtml(t,opt){
     select.options.add(option);
  }  
 }
-function ponerDatosSelect2Html(t,opt){
-  document.getElementById("tituloSelect2").innerHTML=t;
-  var select = document.getElementsByTagName("select2")[0];
-  for (i = 0; i < opt.length; i++) { 
-    var option = document.createElement("option");
-    option.text = opt[i];
-    option.value=i+1;
-    select2.options.add(option);
- }  
-}
 
 function ponerDatosCheckboxHtml(t,opt){
  var checkboxContainer=document.getElementById('checkboxDiv');
@@ -188,6 +178,16 @@ function ponerDatosCheckboxHtml(t,opt){
  }  
 }
 
+function ponerDatosSelect2Html(t,opt){
+  document.getElementById("tituloSelect2").innerHTML=t;
+  var select = document.getElementsByTagName("select2")[0];
+  for (i = 0; i < opt.length; i++) { 
+    var option = document.createElement("option");
+    option.text = opt[i];
+    option.value=i+1;
+    select.options.add(option);
+ }  
+}
 //****************************************************************************************************
 //Gestionar la presentación de las respuestas
 function darRespuestaHtml(r){
