@@ -23,4 +23,12 @@
 <answer>2</answer> <!-- 0, 1, 2 -->
 <answer>0</answer>
 </question>
+<question id='IRON005'>
+<type>select</type>
+<title>Com es diu la mascota d'Iron Maiden?</title>
+<option>Jhon</option>
+<option>Eddie</option> 
+<option>Steve</option>
+<answer>1</answer> <!-- 0, 1, 2 -->
+</question>
 </questions>
