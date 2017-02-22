@@ -1,6 +1,7 @@
 var formElement=null;
 var numeroSecreto=null;
 var respuestaSelect=null;
+var respuestaSelect2=null;
 var respuestasCheckbox = [];
 var nota = 0;  //nota de la prueba sobre 3 puntos (hay 3 preguntas)
 
@@ -113,7 +114,7 @@ function corregirSelect2(){
   //para implementarlo con type radio, usar value para enumerar las opciones <input type='radio' value='1'>...
   //luego comparar ese value con el value guardado en answer
   var sel2 = formElement.elements[1];  
-  if (sel2.selectedIndex-1==respuestaSelect) { //-1 porque hemos puesto una opción por defecto en el select que ocupa la posición 0
+  if (sel2.selectedIndex-1==respuestaSelect2) { //-1 porque hemos puesto una opción por defecto en el select que ocupa la posición 0
    darRespuestaHtml("P2: Correcto");
    nota +=1;
   }
