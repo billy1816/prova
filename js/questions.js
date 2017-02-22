@@ -69,6 +69,16 @@ function gestionarXml(dadesXml){
   respuestasCheckbox[i]=xmlDoc.getElementById("IRON006").getElementsByTagName("answer")[i].innerHTML;
  }
 }
+//SELECT2
+ //Recuperamos el título y las opciones, guardamos la respuesta correcta
+ var tituloSelect2=xmlDoc.getElementsByTagName("title")[1].innerHTML;
+ var opcionesSelect2 = [];
+ var nopt = xmlDoc.getElementById("IRON005").getElementsByTagName('option').length;
+  for (i = 0; i < nopt; i++) { 
+    opcionesSelect2[i] = xmlDoc.getElementById("IRON005").getElementsByTagName('option')[i].innerHTML;
+ }
+ ponerDatosSelectHtml(tituloSelect2,opcionesSelect2);
+ respuestaSelect2=parseInt(xmlDoc.getElementsByTagName("answer")[1].innerHTML);
 
 //****************************************************************************************************
 //implementación de la corrección
@@ -93,6 +103,17 @@ function corregirSelect(){
   //luego comparar ese value con el value guardado en answer
   var sel = formElement.elements[1];  
   if (sel.selectedIndex-1==respuestaSelect) { //-1 porque hemos puesto una opción por defecto en el select que ocupa la posición 0
+   darRespuestaHtml("P2: Correcto");
+   nota +=1;
+  }
+  else darRespuestaHtml("P2: Incorrecto");
+}
+function corregirSelect2(){
+  //Compara el índice seleccionado con el valor del íncide que hay en el xml (<answer>2</answer>)
+  //para implementarlo con type radio, usar value para enumerar las opciones <input type='radio' value='1'>...
+  //luego comparar ese value con el value guardado en answer
+  var sel2 = formElement.elements[1];  
+  if (sel2.selectedIndex-1==respuestaSelect) { //-1 porque hemos puesto una opción por defecto en el select que ocupa la posición 0
    darRespuestaHtml("P2: Correcto");
    nota +=1;
   }
@@ -136,6 +157,16 @@ function ponerDatosSelectHtml(t,opt){
     option.text = opt[i];
     option.value=i+1;
     select.options.add(option);
+ }  
+}
+function ponerDatosSelect2Html(t,opt){
+  document.getElementById("tituloSelect2").innerHTML=t;
+  var select = document.getElementsByTagName("select2")[0];
+  for (i = 0; i < opt.length; i++) { 
+    var option = document.createElement("option");
+    option.text = opt[i];
+    option.value=i+1;
+    select2.options.add(option);
  }  
 }
 
