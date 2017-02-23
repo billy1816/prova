@@ -72,14 +72,14 @@ function gestionarXml(dadesXml){
 }
 //SELECT2
  //Recuperamos el título y las opciones, guardamos la respuesta correcta
- var tituloSelect2=xmlDoc.getElementsByTagName("title")[1].innerHTML;
+ var tituloSelect2=xmlDoc.getElementsByTagName("title")[3].innerHTML;
  var opcionesSelect2 = [];
  var nopt = xmlDoc.getElementById("IRON005").getElementsByTagName('option').length;
   for (i = 0; i < nopt; i++) { 
     opcionesSelect2[i] = xmlDoc.getElementById("IRON005").getElementsByTagName('option')[i].innerHTML;
  }
  ponerDatosSelect2Html(tituloSelect2,opcionesSelect2);
- respuestaSelect2=parseInt(xmlDoc.getElementsByTagName("answer")[1].innerHTML);
+ respuestaSelect2=parseInt(xmlDoc.getElementsByTagName("answer")[3].innerHTML);
 
 //****************************************************************************************************
 //implementación de la corrección
@@ -113,7 +113,7 @@ function corregirSelect2(){
   //Compara el índice seleccionado con el valor del íncide que hay en el xml (<answer>2</answer>)
   //para implementarlo con type radio, usar value para enumerar las opciones <input type='radio' value='1'>...
   //luego comparar ese value con el value guardado en answer
-  var sel2 = formElement.elements[1];  
+  var sel2 = formElement.elements[3];  
   if (sel2.selectedIndex-1==respuestaSelect2) { //-1 porque hemos puesto una opción por defecto en el select que ocupa la posición 0
    darRespuestaHtml("P2: Correcto");
    nota +=1;
@@ -180,7 +180,7 @@ function ponerDatosCheckboxHtml(t,opt){
 
 function ponerDatosSelect2Html(t,opt){
   document.getElementById("tituloSelect2").innerHTML=t;
-  var select = document.getElementsByTagName("select2")[0];
+  var select = document.getElementsByTagName("select")[3];
   for (i = 0; i < opt.length; i++) { 
     var option = document.createElement("option");
     option.text = opt[i];
@@ -198,7 +198,7 @@ function darRespuestaHtml(r){
 }
 
 function presentarNota(){
-   darRespuestaHtml("Nota: "+nota+" puntos sobre 3");
+   darRespuestaHtml("Nota: "+nota+" puntos sobre 4");
 }
 
 function inicializar(){
@@ -226,4 +226,8 @@ function comprobar(){
     alert("Selecciona una opción del checkbox");
     return false;
    } else  return true;
+ else if (f.elements[3].selectedIndex==0) {
+    f.elements[3].focus();
+    alert("Selecciona una opción");
+    return false;
 }
