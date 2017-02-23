@@ -69,7 +69,16 @@ function gestionarXml(dadesXml){
   respuestasCheckbox[i]=xmlDoc.getElementById("IRON006").getElementsByTagName("answer")[i].innerHTML;
  }
 }
-
+ //SELECT
+ //Recuperamos el título y las opciones, guardamos la respuesta correcta
+ var tituloSelect=xmlDoc.getElementsByTagName("title")[3].innerHTML;
+ var opcionesSelect = [];
+ var nopt = xmlDoc.getElementById("IRON005").getElementsByTagName('option').length;
+  for (i = 0; i < nopt; i++) { 
+    opcionesSelect[i] = xmlDoc.getElementById("IRON005").getElementsByTagName('option')[i].innerHTML;
+ }
+ ponerDatosSelectHtml(tituloSelect,opcionesSelect);
+ respuestaSelect=parseInt(xmlDoc.getElementsByTagName("answer")[3].innerHTML);
 //****************************************************************************************************
 //implementación de la corrección
 
@@ -121,6 +130,18 @@ function corregirCheckbox(){
    } 
   }
 }
+function corregirSelect2(){
+  //Compara el índice seleccionado con el valor del íncide que hay en el xml (<answer>2</answer>)
+  //para implementarlo con type radio, usar value para enumerar las opciones <input type='radio' value='1'>...
+  //luego comparar ese value con el value guardado en answer
+  var sel = formElement.elements[3];  
+  if (sel.selectedIndex-1==respuestaSelect) { //-1 porque hemos puesto una opción por defecto en el select que ocupa la posición 0
+   darRespuestaHtml("P2: Correcto");
+   nota +=1;
+  }
+  else darRespuestaHtml("P2: Incorrecto");
+}
+
 
 //****************************************************************************************************
 // poner los datos recibios en el HTML
@@ -153,6 +174,16 @@ function ponerDatosCheckboxHtml(t,opt){
     checkboxContainer.appendChild(input);
     checkboxContainer.appendChild(label);
     checkboxContainer.appendChild(document.createElement("br"));
+ }  
+}
+function ponerDatosSelectHtml2(t,opt){
+  document.getElementById("tituloSelect").innerHTML=t;
+  var select = document.getElementsByTagName("select")[3];
+  for (i = 0; i < opt.length; i++) { 
+    var option = document.createElement("option");
+    option.text = opt[i];
+    option.value=i+1;
+    select.options.add(option);
  }  
 }
 
@@ -189,7 +220,12 @@ function comprobar(){
     f.elements[1].focus();
     alert("Selecciona una opción");
     return false;
-   } if (!checked) {    
+   } else if (f.elements[3].selectedIndex==0) {
+    f.elements[3].focus();
+    alert("Selecciona una opción");
+    return false;
+   }
+ if (!checked) {    
     document.getElementsByTagName("h3")[2].focus();
     alert("Selecciona una opción del checkbox");
     return false;
