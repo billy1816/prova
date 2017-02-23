@@ -152,7 +152,7 @@ function ponerDatosInputHtml(t){
 
 function ponerDatosSelectHtml(t,opt){
   document.getElementById("tituloSelect").innerHTML=t;
-  var select = document.getElementsByTagName("select")[0];
+  var select = document.getElementsByTagName("select2")[0];
   for (i = 0; i < opt.length; i++) { 
     var option = document.createElement("option");
     option.text = opt[i];
