@@ -1,7 +1,6 @@
 var formElement=null;
 var numeroSecreto=null;
 var respuestaSelect=null;
-var respuestaSelect2=null;
 var respuestasCheckbox = [];
 var nota = 0;  //nota de la prueba sobre 3 puntos (hay 3 preguntas)
 
@@ -49,9 +48,9 @@ function gestionarXml(dadesXml){
  //Recuperamos el título y las opciones, guardamos la respuesta correcta
  var tituloSelect=xmlDoc.getElementsByTagName("title")[1].innerHTML;
  var opcionesSelect = [];
- var nopt = xmlDoc.getElementById("IRON002").getElementsByTagName('option').length;
+ var nopt = xmlDoc.getElementById("profe_002").getElementsByTagName('option').length;
   for (i = 0; i < nopt; i++) { 
-    opcionesSelect[i] = xmlDoc.getElementById("IRON002").getElementsByTagName('option')[i].innerHTML;
+    opcionesSelect[i] = xmlDoc.getElementById("profe_002").getElementsByTagName('option')[i].innerHTML;
  }
  ponerDatosSelectHtml(tituloSelect,opcionesSelect);
  respuestaSelect=parseInt(xmlDoc.getElementsByTagName("answer")[1].innerHTML);
@@ -60,26 +59,16 @@ function gestionarXml(dadesXml){
  //Recuperamos el título y las opciones, guardamos las respuestas correctas
  var tituloCheckbox = xmlDoc.getElementsByTagName("title")[2].innerHTML;
  var opcionesCheckbox = [];
- var nopt = xmlDoc.getElementById("IRON006").getElementsByTagName('option').length;
+ var nopt = xmlDoc.getElementById("profe_003").getElementsByTagName('option').length;
  for (i = 0; i < nopt; i++) { 
-    opcionesCheckbox[i]=xmlDoc.getElementById("IRON006").getElementsByTagName('option')[i].innerHTML;
+    opcionesCheckbox[i]=xmlDoc.getElementById("profe_003").getElementsByTagName('option')[i].innerHTML;
  }  
  ponerDatosCheckboxHtml(tituloCheckbox,opcionesCheckbox);
- var nres = xmlDoc.getElementById("IRON006").getElementsByTagName('answer').length;
+ var nres = xmlDoc.getElementById("profe_003").getElementsByTagName('answer').length;
  for (i = 0; i < nres; i++) { 
-  respuestasCheckbox[i]=xmlDoc.getElementById("IRON006").getElementsByTagName("answer")[i].innerHTML;
+  respuestasCheckbox[i]=xmlDoc.getElementById("profe_003").getElementsByTagName("answer")[i].innerHTML;
  }
 }
-//SELECT2
- //Recuperamos el título y las opciones, guardamos la respuesta correcta
- var tituloSelect2=xmlDoc.getElementsByTagName("title")[3].innerHTML;
- var opcionesSelect2 = [];
- var nopt = xmlDoc.getElementById("IRON005").getElementsByTagName('option').length;
-  for (i = 0; i < nopt; i++) { 
-    opcionesSelect2[i] = xmlDoc.getElementById("IRON005").getElementsByTagName('option')[i].innerHTML;
- }
- ponerDatosSelect2Html(tituloSelect2,opcionesSelect2);
- respuestaSelect2=parseInt(xmlDoc.getElementsByTagName("answer")[3].innerHTML);
 
 //****************************************************************************************************
 //implementación de la corrección
@@ -104,17 +93,6 @@ function corregirSelect(){
   //luego comparar ese value con el value guardado en answer
   var sel = formElement.elements[1];  
   if (sel.selectedIndex-1==respuestaSelect) { //-1 porque hemos puesto una opción por defecto en el select que ocupa la posición 0
-   darRespuestaHtml("P2: Correcto");
-   nota +=1;
-  }
-  else darRespuestaHtml("P2: Incorrecto");
-}
-function corregirSelect2(){
-  //Compara el índice seleccionado con el valor del íncide que hay en el xml (<answer>2</answer>)
-  //para implementarlo con type radio, usar value para enumerar las opciones <input type='radio' value='1'>...
-  //luego comparar ese value con el value guardado en answer
-  var sel2 = formElement.elements[3];  
-  if (sel2.selectedIndex-1==respuestaSelect2) { //-1 porque hemos puesto una opción por defecto en el select que ocupa la posición 0
    darRespuestaHtml("P2: Correcto");
    nota +=1;
   }
@@ -152,7 +130,7 @@ function ponerDatosInputHtml(t){
 
 function ponerDatosSelectHtml(t,opt){
   document.getElementById("tituloSelect").innerHTML=t;
-  var select = document.getElementsByTagName("select2")[0];
+  var select = document.getElementsByTagName("select")[0];
   for (i = 0; i < opt.length; i++) { 
     var option = document.createElement("option");
     option.text = opt[i];
@@ -178,16 +156,6 @@ function ponerDatosCheckboxHtml(t,opt){
  }  
 }
 
-function ponerDatosSelect2Html(t,opt){
-  document.getElementById("tituloSelect2").innerHTML=t;
-  var select = document.getElementsByTagName("select")[3];
-  for (i = 0; i < opt.length; i++) { 
-    var option = document.createElement("option");
-    option.text = opt[i];
-    option.value=i+1;
-    select.options.add(option);
- }  
-}
 //****************************************************************************************************
 //Gestionar la presentación de las respuestas
 function darRespuestaHtml(r){
@@ -198,7 +166,7 @@ function darRespuestaHtml(r){
 }
 
 function presentarNota(){
-   darRespuestaHtml("Nota: "+nota+" puntos sobre 4");
+   darRespuestaHtml("Nota: "+nota+" puntos sobre 3");
 }
 
 function inicializar(){
@@ -226,4 +194,4 @@ function comprobar(){
     alert("Selecciona una opción del checkbox");
     return false;
    } else  return true;
-
+}
