@@ -7,9 +7,7 @@ window.onload = function(){
    inicializar();
    if (comprobar()){
     corregirNumber();
-    corregirSelect();
-    corregirCheckbox();
-    presentarNota();
+       presentarNota();
    }
    return false;
  }
