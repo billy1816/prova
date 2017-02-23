@@ -49,9 +49,9 @@ function gestionarXml(dadesXml){
  //Recuperamos el título y las opciones, guardamos la respuesta correcta
  var tituloSelect=xmlDoc.getElementsByTagName("title")[1].innerHTML;
  var opcionesSelect = [];
- var nopt = xmlDoc.getElementById("IRON002").getElementsByTagName('option').length;
+ var nopt = xmlDoc.getElementById("IRON005").getElementsByTagName('option').length;
   for (i = 0; i < nopt; i++) { 
-    opcionesSelect[i] = xmlDoc.getElementById("IRON002").getElementsByTagName('option')[i].innerHTML;
+    opcionesSelect[i] = xmlDoc.getElementById("IRON005").getElementsByTagName('option')[i].innerHTML;
  }
  ponerDatosSelectHtml(tituloSelect,opcionesSelect);
  respuestaSelect=parseInt(xmlDoc.getElementsByTagName("answer")[1].innerHTML);
