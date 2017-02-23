@@ -21,7 +21,6 @@
 <option>b) Killers, Iron Maiden, The Number of the Beast, Powerslave </option> 
 <option>c) Iron Maiden, Killers, The Number of the Beast, Powerslave </option>
 <answer>2</answer> <!-- 0, 1, 2 -->
-<answer>0</answer>
 </question>
 <question id='IRON005'>
 <type>select</type>
