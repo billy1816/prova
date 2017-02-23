@@ -1,7 +1,4 @@
 var formElement=null;
-var numeroSecreto=null;
-var respuestaSelect=null;
-var respuestasCheckbox = [];
 var respuestaSelect2=null;
 var nota = 0;  //nota de la prueba sobre 3 puntos (hay 3 preguntas)
 
