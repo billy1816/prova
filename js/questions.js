@@ -226,8 +226,4 @@ function comprobar(){
     alert("Selecciona una opción del checkbox");
     return false;
    } else  return true;
- else if (f.elements[3].selectedIndex==0) {
-    f.elements[3].focus();
-    alert("Selecciona una opción");
-    return false;
-}
+
