@@ -44,7 +44,31 @@ function gestionarXml(dadesXml){
  ponerDatosInputHtml(tituloInput);
  numeroSecreto=parseInt(xmlDoc.getElementsByTagName("answer")[0].innerHTML);
  
- 
+ //SELECT
+ //Recuperamos el título y las opciones, guardamos la respuesta correcta
+ var tituloSelect=xmlDoc.getElementsByTagName("title")[1].innerHTML;
+ var opcionesSelect = [];
+ var nopt = xmlDoc.getElementById("profe_002").getElementsByTagName('option').length;
+  for (i = 0; i < nopt; i++) { 
+    opcionesSelect[i] = xmlDoc.getElementById("profe_002").getElementsByTagName('option')[i].innerHTML;
+ }
+ ponerDatosSelectHtml(tituloSelect,opcionesSelect);
+ respuestaSelect=parseInt(xmlDoc.getElementsByTagName("answer")[1].innerHTML);
+
+ //CHECKBOX
+ //Recuperamos el título y las opciones, guardamos las respuestas correctas
+ var tituloCheckbox = xmlDoc.getElementsByTagName("title")[2].innerHTML;
+ var opcionesCheckbox = [];
+ var nopt = xmlDoc.getElementById("profe_003").getElementsByTagName('option').length;
+ for (i = 0; i < nopt; i++) { 
+    opcionesCheckbox[i]=xmlDoc.getElementById("profe_003").getElementsByTagName('option')[i].innerHTML;
+ }  
+ ponerDatosCheckboxHtml(tituloCheckbox,opcionesCheckbox);
+ var nres = xmlDoc.getElementById("profe_003").getElementsByTagName('answer').length;
+ for (i = 0; i < nres; i++) { 
+  respuestasCheckbox[i]=xmlDoc.getElementById("profe_003").getElementsByTagName("answer")[i].innerHTML;
+ }
+}
 
 //****************************************************************************************************
 //implementación de la corrección
@@ -63,7 +87,40 @@ function corregirNumber(){
   }
 }
 
+function corregirSelect(){
+  //Compara el índice seleccionado con el valor del íncide que hay en el xml (<answer>2</answer>)
+  //para implementarlo con type radio, usar value para enumerar las opciones <input type='radio' value='1'>...
+  //luego comparar ese value con el value guardado en answer
+  var sel = formElement.elements[1];  
+  if (sel.selectedIndex-1==respuestaSelect) { //-1 porque hemos puesto una opción por defecto en el select que ocupa la posición 0
+   darRespuestaHtml("P2: Correcto");
+   nota +=1;
+  }
+  else darRespuestaHtml("P2: Incorrecto");
+}
 
+//Si necesitáis ayuda para hacer un corregirRadio() decirlo, lo ideal es que a podáis construirla modificando corregirCheckbox
+function corregirCheckbox(){
+  //Para cada opción mira si está checkeada, si está checkeada mira si es correcta y lo guarda en un array escorrecta[]
+  var f=formElement;
+  var escorrecta = [];
+  for (i = 0; i < f.color.length; i++) {  //"color" es el nombre asignado a todos los checkbox
+   if (f.color[i].checked) {
+    escorrecta[i]=false;     
+    for (j = 0; j < respuestasCheckbox.length; j++) {
+     if (i==respuestasCheckbox[j]) escorrecta[i]=true;
+    }
+    //si es correcta sumamos y ponemos mensaje, si no es correcta restamos y ponemos mensaje.
+    if (escorrecta[i]) {
+     nota +=1.0/respuestasCheckbox.length;  //dividido por el número de respuestas correctas   
+     darRespuestaHtml("P3: "+i+" correcta");    
+    } else {
+     nota -=1.0/respuestasCheckbox.length;  //dividido por el número de respuestas correctas   
+     darRespuestaHtml("P3: "+i+" incorrecta");
+    }   
+   } 
+  }
+}
 
 //****************************************************************************************************
 // poner los datos recibios en el HTML
@@ -118,3 +175,23 @@ function inicializar(){
 }
 
 //Comprobar que se han introducido datos en el formulario
+function comprobar(){
+   var f=formElement;
+   var checked=false;
+   for (i = 0; i < f.color.length; i++) {  //"color" es el nombre asignado a todos los checkbox
+      if (f.color[i].checked) checked=true;
+   }
+   if (f.elements[0].value=="") {
+    f.elements[0].focus();
+    alert("Escribe un número");
+    return false;
+   } else if (f.elements[1].selectedIndex==0) {
+    f.elements[1].focus();
+    alert("Selecciona una opción");
+    return false;
+   } if (!checked) {    
+    document.getElementsByTagName("h3")[2].focus();
+    alert("Selecciona una opción del checkbox");
+    return false;
+   } else  return true;
+}
