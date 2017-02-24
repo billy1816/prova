@@ -97,7 +97,7 @@ function corregirSelect(){
    nota +=1;
   }
   else darRespuestaHtml("P2: Incorrecto");
-
+}
 
 //Si necesitáis ayuda para hacer un corregirRadio() decirlo, lo ideal es que a podáis construirla modificando corregirCheckbox
 function corregirCheckbox(){
