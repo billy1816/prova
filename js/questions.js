@@ -128,16 +128,7 @@ function ponerDatosInputHtml(t){
  document.getElementById("tituloInput").innerHTML = t;
 }
 
-function ponerDatosSelectHtml(t,opt){
-  document.getElementById("tituloSelect").innerHTML=t;
-  var select = document.getElementsByTagName("select")[0];
-  for (i = 0; i < opt.length; i++) { 
-    var option = document.createElement("option");
-    option.text = opt[i];
-    option.value=i+1;
-    select.options.add(option);
- }  
-}
+
 
 function ponerDatosCheckboxHtml(t,opt){
  var checkboxContainer=document.getElementById('checkboxDiv');
