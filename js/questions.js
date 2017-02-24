@@ -15,7 +15,6 @@ window.onload = function(){
    if (comprobar()){
     corregirNumber();
     corregirSelect();
-    corregirCheckbox();
     presentarNota();
    }
    return false;
@@ -55,20 +54,7 @@ function gestionarXml(dadesXml){
  ponerDatosSelectHtml(tituloSelect,opcionesSelect);
  respuestaSelect=parseInt(xmlDoc.getElementsByTagName("answer")[1].innerHTML);
 
- //CHECKBOX
- //Recuperamos el título y las opciones, guardamos las respuestas correctas
- var tituloCheckbox = xmlDoc.getElementsByTagName("title")[2].innerHTML;
- var opcionesCheckbox = [];
- var nopt = xmlDoc.getElementById("profe_003").getElementsByTagName('option').length;
- for (i = 0; i < nopt; i++) { 
-    opcionesCheckbox[i]=xmlDoc.getElementById("profe_003").getElementsByTagName('option')[i].innerHTML;
- }  
- ponerDatosCheckboxHtml(tituloCheckbox,opcionesCheckbox);
- var nres = xmlDoc.getElementById("profe_003").getElementsByTagName('answer').length;
- for (i = 0; i < nres; i++) { 
-  respuestasCheckbox[i]=xmlDoc.getElementById("profe_003").getElementsByTagName("answer")[i].innerHTML;
- }
-}
+ 
 
 //****************************************************************************************************
 //implementación de la corrección
@@ -99,28 +85,6 @@ function corregirSelect(){
   else darRespuestaHtml("P2: Incorrecto");
 }
 
-//Si necesitáis ayuda para hacer un corregirRadio() decirlo, lo ideal es que a podáis construirla modificando corregirCheckbox
-function corregirCheckbox(){
-  //Para cada opción mira si está checkeada, si está checkeada mira si es correcta y lo guarda en un array escorrecta[]
-  var f=formElement;
-  var escorrecta = [];
-  for (i = 0; i < f.color.length; i++) {  //"color" es el nombre asignado a todos los checkbox
-   if (f.color[i].checked) {
-    escorrecta[i]=false;     
-    for (j = 0; j < respuestasCheckbox.length; j++) {
-     if (i==respuestasCheckbox[j]) escorrecta[i]=true;
-    }
-    //si es correcta sumamos y ponemos mensaje, si no es correcta restamos y ponemos mensaje.
-    if (escorrecta[i]) {
-     nota +=1.0/respuestasCheckbox.length;  //dividido por el número de respuestas correctas   
-     darRespuestaHtml("P3: "+i+" correcta");    
-    } else {
-     nota -=1.0/respuestasCheckbox.length;  //dividido por el número de respuestas correctas   
-     darRespuestaHtml("P3: "+i+" incorrecta");
-    }   
-   } 
-  }
-}
 
 //****************************************************************************************************
 // poner los datos recibios en el HTML
@@ -139,22 +103,6 @@ function ponerDatosSelectHtml(t,opt){
  }  
 }
 
-function ponerDatosCheckboxHtml(t,opt){
- var checkboxContainer=document.getElementById('checkboxDiv');
- document.getElementById('tituloCheckbox').innerHTML = t;
- for (i = 0; i < opt.length; i++) { 
-    var input = document.createElement("input");
-    var label = document.createElement("label");
-    label.innerHTML=opt[i];
-    label.setAttribute("for", "color_"+i);
-    input.type="checkbox";
-    input.name="color";
-    input.id="color_"+i;;    
-    checkboxContainer.appendChild(input);
-    checkboxContainer.appendChild(label);
-    checkboxContainer.appendChild(document.createElement("br"));
- }  
-}
 
 //****************************************************************************************************
 //Gestionar la presentación de las respuestas
@@ -174,24 +122,4 @@ function inicializar(){
    nota=0.0;
 }
 
-//Comprobar que se han introducido datos en el formulario
-function comprobar(){
-   var f=formElement;
-   var checked=false;
-   for (i = 0; i < f.color.length; i++) {  //"color" es el nombre asignado a todos los checkbox
-      if (f.color[i].checked) checked=true;
-   }
-   if (f.elements[0].value=="") {
-    f.elements[0].focus();
-    alert("Escribe un número");
-    return false;
-   } else if (f.elements[1].selectedIndex==0) {
-    f.elements[1].focus();
-    alert("Selecciona una opción");
-    return false;
-   } if (!checked) {    
-    document.getElementsByTagName("h3")[2].focus();
-    alert("Selecciona una opción del checkbox");
-    return false;
-   } else  return true;
-}
+
