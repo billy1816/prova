@@ -91,7 +91,7 @@ function ponerDatosInputHtml(t){
  document.getElementById("tituloInput").innerHTML = t;
 }
 
-***********************************************************************************************
+//***********************************************************************************************
 //Gestionar la presentación de las respuestas
 
 
