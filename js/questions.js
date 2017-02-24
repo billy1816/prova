@@ -118,23 +118,3 @@ function inicializar(){
 }
 
 //Comprobar que se han introducido datos en el formulario
-function comprobar(){
-   var f=formElement;
-   var checked=false;
-   for (i = 0; i < f.color.length; i++) {  //"color" es el nombre asignado a todos los checkbox
-      if (f.color[i].checked) checked=true;
-   }
-   if (f.elements[0].value=="") {
-    f.elements[0].focus();
-    alert("Escribe un número");
-    return false;
-   } else if (f.elements[1].selectedIndex==0) {
-    f.elements[1].focus();
-    alert("Selecciona una opción");
-    return false;
-   } if (!checked) {    
-    document.getElementsByTagName("h3")[2].focus();
-    alert("Selecciona una opción del checkbox");
-    return false;
-   } else  return true;
-}
